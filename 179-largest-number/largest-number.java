@@ -1,30 +1,28 @@
-import java.util.*;
+import java.util.Arrays;
 
 class Solution {
     public String largestNumber(int[] nums) {
-
-        String[] arr = new String[nums.length];
-
-        // Convert integers to strings
+        // Step 1: Convert the integer array to a String array
+        String[] strNums = new String[nums.length];
         for (int i = 0; i < nums.length; i++) {
-            arr[i] = String.valueOf(nums[i]);
+            strNums[i] = String.valueOf(nums[i]);
         }
-
-        // Sort using concatenation comparison
-        Arrays.sort(arr, (a, b) -> (b + a).compareTo(a + b));
-
-        // Handle arrays containing only zeros
-        if (arr[0].equals("0")) {
+        
+        // Step 2: Sort using a Custom Comparator (Lambda Expression)
+        // (b + a).compareTo(a + b) sorts in descending order based on our trick
+        Arrays.sort(strNums, (a, b) -> (b + a).compareTo(a + b));
+        
+        // Step 3: Handle the edge case where the array is full of zeros
+        if (strNums[0].equals("0")) {
             return "0";
         }
-
-        // Build the result
+        
+        // Step 4: Build the final string
         StringBuilder result = new StringBuilder();
-
-        for (String s : arr) {
-            result.append(s);
+        for (String numStr : strNums) {
+            result.append(numStr);
         }
-
+        
         return result.toString();
     }
 }
