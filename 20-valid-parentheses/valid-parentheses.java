@@ -6,21 +6,23 @@ class Solution {
         Deque<Character> st = new ArrayDeque<>();
         
         for (char c : s.toCharArray()) {
+            // FIX 1: Use || (OR) instead of && (AND)
             if (c == '(' || c == '{' || c == '[') {
                 st.push(c);
-            } else {
+            } 
+            else { // Opening of the else block
                 if (st.isEmpty()) {
                     return false;
                 }
-                // REMOVED the closing brace that was here
                 
+                // FIX 2: This pop() and comparison must stay INSIDE the else block
                 char top = st.pop();
                 if ((c == ')' && top != '(') || 
                     (c == '}' && top != '{') || 
                     (c == ']' && top != '[')) {
                     return false;
                 }
-            } // PLACED the closing brace here instead
+            } // Closing of the else block
         }
         
         return st.isEmpty();
